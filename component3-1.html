@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>Vue.js ComponentExam3</title>
+        <style>
+            .demo{
+                font-family: sans-serif;
+                border: 1px solid #eee;
+                border-radius: 2px;
+                padding: 20px 30px;
+                margin-top: 1em;
+                margin-bottom: 40px;
+                user-select: none;
+                overflow-x: auto;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="blog-posts-demo" class="demo">
+            <blog-post title = "Vueとの航海"></blog-post>
+            <blog-post title = "Vueとの旅"></blog-post>
+            <blog-post title = "Vue旅行記"></blog-post>
+        </div>
+
+        <script src="https://unpkg.com/vue@3.2.0/dist/vue.global.js"></script>
+        <script>
+            const app = Vue.createApp({
+                components: {
+                    'blog-post': {
+                        props: ['title'],
+                        template: `<h4>{{title}}</h4>`
+                    }
+                }
+            });
+            /*
+            const app = Vue.createApp({});
+
+            app.component('blog-post', {
+                props: ['title'],
+                template: `<h4>{{title}}</h4>`
+            })
+            */
+            app.mount('#blog-posts-demo');
+        </script>
+    </body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>Vue.js ComponentExam1</title>
+        <!--
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        -->
+        <style>
+            .demo{
+                font-family: sans-serif;
+                border: 1px solid #eee;
+                border-radius: 2px;
+                padding: 20px 30px;
+                margin-top: 1em;
+                margin-bottom: 40px;
+                user-select: none;
+                overflow-x: auto;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="components-demo">
+            <button-counter></button-counter>
+        </div>
+
+        <script src="https://unpkg.com/vue@3.2.0/dist/vue.global.js"></script>
+        <script>
+            // Create Vue Application
+            const app = Vue.createApp({});
+
+            // Define a new global component called button-counter
+            app.component('button-counter', {
+                data() {
+                    return {
+                        count: 0
+                    };
+                },
+                template:`
+                    <button v-on:click="count++">
+                        カウント{{count}}
+                    </button>`
+            })
+            app.mount('#components-demo');
+        </script>
+    </body>
+</html>

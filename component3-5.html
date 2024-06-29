@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8">
+        <title>Vue.js ComponentExam7</title>
+        <style>
+            .tab-button{
+                border: 1px solid #ccc;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+                padding: 6px 10px;
+                cursor: pointer;
+                background: #f0f0f0;
+                margin-bottom: -1px;
+                margin-right: -1px;
+            }
+            .tab-button:hover{
+                background: #e0e0e0;
+            }
+            .tab-button.active{
+                background: #e0e0e0;
+            }
+            .demo-tab{
+                border: 1px solid #ccc;
+                padding: 10px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="dynamic-component-demo">
+            <button
+                v-for="tab in tabs"
+                v-bind:class="['tab-button', {active:currentTab === tab}]"
+                v-on:click="currentTab = tab"
+            >
+                {{tab}}
+            </button>
+            <component
+                v-bind:is="currentTabComponent" class="tab"
+            >
+            </component>
+        </div>
+
+        <script src="https://unpkg.com/vue@3.2.0/dist/vue.global.js"></script>
+        <script>
+            const app = Vue.createApp({
+                data() {
+                    return {
+                        currentTab: 'Home',
+                        tabs: ['Home', 'Posts', 'Archive']
+                    };
+                },
+                computed: {
+                    currentTabComponent() {
+                        return 'tab-' + this.currentTab.toLowerCase();
+                    }
+                }
+            });
+            
+            app.component('tab-home', {
+                template: `<div class="demo-tab">Home component<div>`
+            });
+            app.component('tab-posts', {
+                template: `<div class="demo-tab">Posts component<div>`
+            });
+            app.component('tab-archive', {
+                template: `<div class="demo-tab">Archive component<div>`
+            });
+
+            app.mount('#dynamic-component-demo');
+        </script>
+    </body>
+</html>
